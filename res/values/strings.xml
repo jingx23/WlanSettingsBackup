@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">Wlan Backup &amp; Restore</string>
+<string name="btnNameBackup">Backup</string>
+<string name="btnClickHandlerBackup">btnClickHandlerBackup</string>
+<string name="infoMessage"></string>
+<string name="btnNameRestore">Restore</string>
+<string name="btnClickHandlerRestore">btnClickHandlerRestore</string>
+</resources>
