@@ -14,7 +14,7 @@ public class ConfigSaver extends Activity {
 	
 	private static final String WPA_SUPPLICANT_FILENAME = "wpa_supplicant.conf";
 	private static final String WPA_SUPPLICANT_PATH = "/data/misc/wifi/" + WPA_SUPPLICANT_FILENAME;
-	private static final String BACKUP_FILENAME = "wpa_supplicant.conf.bkp";
+	private static final String BACKUP_FILENAME = "wpa_supplicant.conf.bak";
 	private static final String BACKUP_PATH = "/sdcard/" + BACKUP_FILENAME;
 	
 	private TextView txtViewInfo;
@@ -39,6 +39,11 @@ public class ConfigSaver extends Activity {
     }
     
     public void btnClickHandlerRestore(View view) throws IOException, InterruptedException {
+    	File file = new File(BACKUP_PATH);
+    	if(!file.exists()){
+    		txtViewInfo.setText("backup file :" + BACKUP_PATH + " not found");
+    		return;
+    	}
     	Runtime r=Runtime.getRuntime();
     	Process p2 = r.exec("su");
     	DataOutputStream d=new DataOutputStream(p2.getOutputStream());
