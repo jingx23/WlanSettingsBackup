@@ -1,0 +1,14 @@
+Info:
+-----
+Wlan Backup & Restore saves the backup file on the root folder of your SD-Card. 
+The backup file name is "wpa_supplicant.conf.bak" (!!!caution: your WLAN Keys are stored in clear text!!!).
+
+TODO:
+-----
+#will follow
+
+Changelog:
+----------
+- Version 1.0 (101023 public Release)
+  - Backup file to SD-Card
+  - Restore file from SD-Card
