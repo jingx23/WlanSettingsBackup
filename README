@@ -12,3 +12,5 @@ Changelog:
 - Version 1.0 (101023 public Release)
   - Backup file to SD-Card
   - Restore file from SD-Card
+- Version 1.0.1 (101023)
+  - Fixed: Permission Problem => other=rw
