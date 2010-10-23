@@ -5,3 +5,5 @@ build/**/*
 ./build
 bin/**/*
 bin/
+deploy/
+wlanSettingsBackup.keystore
