@@ -48,7 +48,7 @@ public class ConfigSaver extends Activity {
     	Process p2 = r.exec("su");
     	DataOutputStream d=new DataOutputStream(p2.getOutputStream());
     	d.writeBytes("cp " + BACKUP_PATH + " " + WPA_SUPPLICANT_PATH + "\n");
-    	d.writeBytes("chmod u=rw,g=rw,o-r-x " + WPA_SUPPLICANT_PATH + "\n");
+    	d.writeBytes("chmod u=rw,g=rw,o=rw " + WPA_SUPPLICANT_PATH + "\n");
     	d.writeBytes("exit\n");
     	d.flush();
     	p2.waitFor();
