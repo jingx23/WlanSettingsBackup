@@ -49,6 +49,7 @@ public class ConfigSaver extends Activity {
     	DataOutputStream d=new DataOutputStream(p2.getOutputStream());
     	d.writeBytes("cp " + BACKUP_PATH + " " + WPA_SUPPLICANT_PATH + "\n");
     	d.writeBytes("chmod u=rw,g=rw,o=rw " + WPA_SUPPLICANT_PATH + "\n");
+    	//d.writeBytes("chown system:wifi " + WPA_SUPPLICANT_PATH + "\n"); //funzt leider nicht system unknown user
     	d.writeBytes("exit\n");
     	d.flush();
     	p2.waitFor();
