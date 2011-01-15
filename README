@@ -5,10 +5,15 @@ The backup file name is "wpa_supplicant.conf.bak" (!!!caution: your WLAN Keys ar
 
 TODO:
 -----
-#will follow
+- GUI improvements
+- Error handling
+- Zip and send backup mail
+- change backup location
 
 Changelog:
 ----------
+- Version 1.0.2 (101023)
+  - Changed from cp to cat
 - Version 1.0.1 (101023)
   - Fixed: Permission Problem => other=rw
 - Version 1.0 (101023 public Release)
