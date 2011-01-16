@@ -6,12 +6,15 @@ import java.io.IOException;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class ConfigSaver extends Activity {
     /** Called when the activity is first created. */
+	
+	private static final String TAG = "wlanSettingsBackup.ActivityConfigSaver";
 	
 	private static final String WPA_SUPPLICANT_FILENAME = "wpa_supplicant.conf";
 	private static final String WPA_SUPPLICANT_PATH = "/data/misc/wifi/" + WPA_SUPPLICANT_FILENAME;
@@ -41,12 +44,14 @@ public class ConfigSaver extends Activity {
     		errMessage = "No cat path found!";
     	}
     	if(errMessage!=null) {
+    		Log.w(TAG, errMessage);
     		Dialog dialog = Common.createErrorDialog(this, errMessage);
     		dialog.show();
     	}
     }
     
     private void doInit(){
+    	Log.d(TAG, "doInit start");
     	catpath 		  = Common.findCatPath();
     	catPathFound 	  = (catpath != null);
     	isRoot 			  = Common.hazIGotRoot();
@@ -55,16 +60,24 @@ public class ConfigSaver extends Activity {
     	Button btnRestore = (Button) findViewById(R.id.Button02);
     	
     	btnBackup.setEnabled(isAllOk);
-    	btnRestore.setEnabled(isAllOk);    	
+    	btnRestore.setEnabled(isAllOk);
+    	
+    	Log.i(TAG, "Cat path: " + catpath);
+    	Log.d(TAG, "doInit end");
     }
     
     public void btnClickHandlerBackup(View view) throws IOException, InterruptedException {
+    	Log.d(TAG, "btnClickHandlerBackup start");
     	Common.runAsRoot(catpath + " " + WPA_SUPPLICANT_PATH + " > " + BACKUP_PATH + "\n");
     	File file = new File(BACKUP_PATH);
-    	txtViewInfo.setText("backup " + (file.exists() ? "successful " + BACKUP_PATH : "failed"));
+    	String backupInfoMessage = "backup " + (file.exists() ? "successful " + BACKUP_PATH : "failed");
+    	txtViewInfo.setText(backupInfoMessage);
+    	Log.i(TAG, backupInfoMessage);
+    	Log.d(TAG, "btnClickHandlerBackup end");
     }
     
     public void btnClickHandlerRestore(View view) throws IOException, InterruptedException {
+    	Log.d(TAG, "btnClickHandlerRestore start");
     	File file = new File(BACKUP_PATH);
     	if(!file.exists()){
     		Common.createAlertDialog(this, "Backup file not found: " + BACKUP_PATH).show();
@@ -72,6 +85,7 @@ public class ConfigSaver extends Activity {
     	}
     	Common.runAsRoot(catpath + " " + BACKUP_PATH + " > " + WPA_SUPPLICANT_PATH + "\n");
     	txtViewInfo.setText("restore successful"); //TODO: Richtige Prüfung einbauen ob successful oder nicht, z.B. ueber Datum
+    	Log.d(TAG, "btnClickHandlerRestore end");
     }
 
 }

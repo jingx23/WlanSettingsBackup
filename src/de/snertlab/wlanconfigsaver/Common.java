@@ -7,8 +7,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 
 public class Common {
+	
+	private static final String TAG = "wlanSettingsBackup.Common";
 	
     public static boolean hazIGotRoot(){
     	return runAsRoot("");
@@ -25,7 +28,7 @@ public class Common {
     	int retval = p2.waitFor();
     	return (retval==0);
     	}catch(Exception e){
-    		//TODO: logging
+    		Log.e(TAG, "runAsRoot", e);
     		return false;
     	}
     }
