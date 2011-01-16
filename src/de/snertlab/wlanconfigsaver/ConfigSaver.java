@@ -63,11 +63,11 @@ public class ConfigSaver extends Activity {
     	boolean isAllOk	  = catPathFound && isRoot;
     	Button btnBackup  = (Button) findViewById(R.id.Button01);
     	Button btnRestore = (Button) findViewById(R.id.Button02);
-    	TextView txtViewProgInfo = (TextView) findViewById(R.id.TextViewProgInfo);
     	
     	btnBackup.setEnabled(isAllOk);
     	btnRestore.setEnabled(isAllOk);
-    	txtViewProgInfo.setText("Version: " + version );
+
+    	this.setTitle( this.getTitle() + " v" + version);
     	
     	Log.i(TAG, "Version: " + version);
     	Log.i(TAG, "Cat path: " + catpath);
