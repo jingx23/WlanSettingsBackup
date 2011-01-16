@@ -5,6 +5,9 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +18,7 @@ public class ConfigSaver extends Activity {
     /** Called when the activity is first created. */
 	
 	private static final String TAG = "wlanSettingsBackup.ActivityConfigSaver";
+	private static final String PACKAGE = "de.snertlab.wlanconfigsaver";
 	
 	private static final String WPA_SUPPLICANT_FILENAME = "wpa_supplicant.conf";
 	private static final String WPA_SUPPLICANT_PATH = "/data/misc/wifi/" + WPA_SUPPLICANT_FILENAME;
@@ -55,13 +59,17 @@ public class ConfigSaver extends Activity {
     	catpath 		  = Common.findCatPath();
     	catPathFound 	  = (catpath != null);
     	isRoot 			  = Common.hazIGotRoot();
+    	String version 	  = getVersionInfo();
     	boolean isAllOk	  = catPathFound && isRoot;
     	Button btnBackup  = (Button) findViewById(R.id.Button01);
     	Button btnRestore = (Button) findViewById(R.id.Button02);
+    	TextView txtViewProgInfo = (TextView) findViewById(R.id.TextViewProgInfo);
     	
     	btnBackup.setEnabled(isAllOk);
     	btnRestore.setEnabled(isAllOk);
+    	txtViewProgInfo.setText("Version: " + version );
     	
+    	Log.i(TAG, "Version: " + version);
     	Log.i(TAG, "Cat path: " + catpath);
     	Log.d(TAG, "doInit end");
     }
@@ -86,6 +94,18 @@ public class ConfigSaver extends Activity {
     	Common.runAsRoot(catpath + " " + BACKUP_PATH + " > " + WPA_SUPPLICANT_PATH + "\n");
     	txtViewInfo.setText("restore successful"); //TODO: Richtige Prüfung einbauen ob successful oder nicht, z.B. ueber Datum
     	Log.d(TAG, "btnClickHandlerRestore end");
+    }
+    
+    private String getVersionInfo(){
+    	PackageInfo pInfo  = null;
+    	String versionName = null;
+    	try {
+    		pInfo = getPackageManager().getPackageInfo(PACKAGE, PackageManager.GET_META_DATA);
+    		versionName = pInfo.versionName;
+    	} catch (NameNotFoundException e) {
+    		Log.e(TAG, "", e);
+    	}
+    	return versionName;
     }
 
 }
