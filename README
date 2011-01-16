@@ -12,7 +12,10 @@ TODO:
 
 Changelog:
 ----------
-- Version 1.0.2 (101023)
+- Version 1.0.3 (110116)
+  - Added logging
+  - Show info if we have no root or didn«t find cat path
+- Version 1.0.2 (110114)
   - Changed from cp to cat
 - Version 1.0.1 (101023)
   - Fixed: Permission Problem => other=rw
