@@ -6,4 +6,5 @@ build/**/*
 bin/**/*
 bin/
 deploy/
+proguard/
 wlanSettingsBackup.keystore
