@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 public class ConfigSaver extends Activity {
@@ -30,6 +32,7 @@ public class ConfigSaver extends Activity {
 	private TextView txtViewInfo;
 	private boolean catPathFound;
 	private boolean isRoot;
+	private CheckBox checkBackupSendMail;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,7 @@ public class ConfigSaver extends Activity {
     	boolean isAllOk	  = catPathFound && isRoot;
     	Button btnBackup  = (Button) findViewById(R.id.Button01);
     	Button btnRestore = (Button) findViewById(R.id.Button02);
+    	checkBackupSendMail = (CheckBox) findViewById(R.id.checkBox1);
     	
     	btnBackup.setEnabled(isAllOk);
     	btnRestore.setEnabled(isAllOk);
@@ -80,6 +84,10 @@ public class ConfigSaver extends Activity {
     	File file = new File(BACKUP_PATH);
     	String backupInfoMessage = "backup " + (file.exists() ? "successful " + BACKUP_PATH : "failed");
     	txtViewInfo.setText(backupInfoMessage);
+    	if(checkBackupSendMail.isChecked() && file.exists()){
+    		Intent emailIntent = Common.createMailIntent(new String[]{""}, "Wlan Backup & Restore", "", file);
+    		startActivity(Intent.createChooser(emailIntent, "Wlan Backup & Restore")); 
+    	}
     	Log.i(TAG, backupInfoMessage);
     	Log.d(TAG, "btnClickHandlerBackup end");
     }

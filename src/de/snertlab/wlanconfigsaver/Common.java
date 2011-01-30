@@ -7,6 +7,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 
 public class Common {
@@ -71,6 +73,16 @@ public class Common {
     	builder.setCancelable(false);
     	AlertDialog alert = builder.create();
     	return alert;
+    }
+    
+    public static Intent createMailIntent(String[] recipient, String subject, String body, File attachment){
+		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+		emailIntent.setType("plain/text");
+		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, recipient);
+		emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
+		emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
+		emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(attachment));
+		return emailIntent; 
     }
 
 }

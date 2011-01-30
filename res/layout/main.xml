@@ -3,15 +3,15 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#FFFFFF"
     >
 
 <Button android:id="@+id/Button01" android:layout_height="wrap_content" android:text="@string/btnNameBackup" android:onClick="@string/btnClickHandlerBackup" android:layout_width="fill_parent" android:layout_marginTop="5px"></Button>
 
 
 <Button android:id="@+id/Button02" android:text="@string/btnNameRestore" android:onClick="@string/btnClickHandlerRestore" android:layout_height="wrap_content" android:layout_width="fill_parent"></Button>
-<TextView android:layout_width="fill_parent" android:text="@string/infoMessage" android:id="@+id/TextView01" android:textColor="#000000" android:layout_height="wrap_content" android:minHeight="50px" android:autoText="false"></TextView>
-<TextView android:textColor="#000000" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_gravity="bottom" android:id="@+id/TextViewProgInfo"></TextView>
+<CheckBox android:id="@+id/checkBox1" android:text="Backup per Mail senden" android:layout_height="wrap_content" android:layout_width="match_parent"></CheckBox>
+<TextView android:layout_width="fill_parent" android:text="@string/infoMessage" android:id="@+id/TextView01" android:layout_height="wrap_content" android:minHeight="50px" android:autoText="false"></TextView>
+<TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_gravity="bottom" android:id="@+id/TextViewProgInfo"></TextView>
 
 
 </LinearLayout>
