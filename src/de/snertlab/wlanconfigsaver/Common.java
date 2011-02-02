@@ -13,7 +13,7 @@ import android.util.Log;
 
 public class Common {
 	
-	private static final String TAG = "wlanSettingsBackup.Common";
+	private static final String TAG = ConfigSaver.TAG;
 	
     public static boolean hazIGotRoot(){
     	return runAsRoot("");
@@ -51,10 +51,6 @@ public class Common {
     	return null;
     }
 
-    public static Dialog createErrorDialog(Context context, String message){
-    	return createAlertDialog(context, "Error", message);
-    }
-    
     public static Dialog createAlertDialog(Context context, String message){
     	return createAlertDialog(context, null, message);
     }

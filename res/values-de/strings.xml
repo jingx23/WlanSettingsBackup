@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">Wlan Backup &amp; Restore</string>
+<string name="btnNameBackup">Backup</string>
+<string name="btnClickHandlerBackup">btnClickHandlerBackup</string>
+<string name="infoMessage"></string>
+<string name="btnNameRestore">Wiederherstellen</string>
+<string name="btnClickHandlerRestore">btnClickHandlerRestore</string>
+<string name="backupSuccessful">Backup erfolgreich</string>
+<string name="backupFailed">Backup fehlgeschlagen</string>
+<string name="restoreSuccessful">Wiederherstellung erfolgreich</string>
+<string name="restoreFailed">Wiederherstellung fehlgeschlagen</string>
+<string name="backupFileNotFound">Backup Datei nicht gefunden:</string>
+<string name="errorNoRoot">Keine root Rechte</string>
+<string name="errorNoCatPath">cat Pfad wurde nicht gefunden</string>
+<string name="errorTitleMsg">Fehler</string>
+</resources>

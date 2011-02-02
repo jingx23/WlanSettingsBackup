@@ -14,12 +14,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.TextView;
+import android.widget.Toast;
 
 public class ConfigSaver extends Activity {
     /** Called when the activity is first created. */
 	
-	private static final String TAG = "wlanSettingsBackup.ActivityConfigSaver";
+	public static final String TAG = "wlanSettingsBackup.ActivityConfigSaver";
 	private static final String PACKAGE = "de.snertlab.wlanconfigsaver";
 	
 	private static final String WPA_SUPPLICANT_FILENAME = "wpa_supplicant.conf";
@@ -29,7 +29,6 @@ public class ConfigSaver extends Activity {
 	
 	private String catpath;
 	
-	private TextView txtViewInfo;
 	private boolean catPathFound;
 	private boolean isRoot;
 	private CheckBox checkBackupSendMail;
@@ -38,7 +37,6 @@ public class ConfigSaver extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        txtViewInfo = (TextView) findViewById(R.id.TextView01);
         doInit();
         checkAllOk();
     }
@@ -46,13 +44,13 @@ public class ConfigSaver extends Activity {
     private void checkAllOk(){
     	String errMessage = null;
     	if(!isRoot){
-    		errMessage = "No root permission!";
+    		errMessage = getString(R.string.errorNoRoot);
     	}else if(!catPathFound){
-    		errMessage = "No cat path found!";
+    		errMessage = getString(R.string.errorNoCatPath);
     	}
     	if(errMessage!=null) {
     		Log.w(TAG, errMessage);
-    		Dialog dialog = Common.createErrorDialog(this, errMessage);
+    		Dialog dialog = Common.createAlertDialog(this, getString(R.string.errorTitleMsg), errMessage);
     		dialog.show();
     	}
     }
@@ -80,13 +78,13 @@ public class ConfigSaver extends Activity {
     
     public void btnClickHandlerBackup(View view) throws IOException, InterruptedException {
     	Log.d(TAG, "btnClickHandlerBackup start");
-    	Common.runAsRoot(catpath + " " + WPA_SUPPLICANT_PATH + " > " + BACKUP_PATH + "\n");
     	File file = new File(BACKUP_PATH);
-    	String backupInfoMessage = "backup " + (file.exists() ? "successful " + BACKUP_PATH : "failed");
-    	txtViewInfo.setText(backupInfoMessage);
+    	file.delete();
+    	Common.runAsRoot(catpath + " " + WPA_SUPPLICANT_PATH + " > " + BACKUP_PATH + "\n");
+    	String backupInfoMessage = file.exists() ? getString(R.string.backupSuccessful) : getString(R.string.backupFailed); 
+    	Toast.makeText(this, backupInfoMessage, Toast.LENGTH_LONG).show();
     	if(checkBackupSendMail.isChecked() && file.exists()){
-    		Intent emailIntent = Common.createMailIntent(new String[]{""}, "Wlan Backup & Restore", "", file);
-    		startActivity(Intent.createChooser(emailIntent, "Wlan Backup & Restore")); 
+    		sendMailWithBackupFile(file);
     	}
     	Log.i(TAG, backupInfoMessage);
     	Log.d(TAG, "btnClickHandlerBackup end");
@@ -96,12 +94,18 @@ public class ConfigSaver extends Activity {
     	Log.d(TAG, "btnClickHandlerRestore start");
     	File file = new File(BACKUP_PATH);
     	if(!file.exists()){
-    		Common.createAlertDialog(this, "Backup file not found: " + BACKUP_PATH).show();
+    		Common.createAlertDialog(this, getString(R.string.backupFileNotFound) + " " + BACKUP_PATH).show();
     		return;
     	}
     	Common.runAsRoot(catpath + " " + BACKUP_PATH + " > " + WPA_SUPPLICANT_PATH + "\n");
-    	txtViewInfo.setText("restore successful"); //TODO: Richtige Prüfung einbauen ob successful oder nicht, z.B. ueber Datum
+    	Toast.makeText(this, getString(R.string.restoreSuccessful), Toast.LENGTH_LONG).show(); //TODO: Richtige Prüfung einbauen ob successful oder nicht, z.B. ueber Datum
     	Log.d(TAG, "btnClickHandlerRestore end");
+    }
+    
+    private void sendMailWithBackupFile(File backupFile){
+    	String appName = getString(R.string.app_name);
+		Intent emailIntent = Common.createMailIntent(new String[]{""}, appName, "", backupFile);
+		startActivity(Intent.createChooser(emailIntent, appName)); 
     }
     
     private String getVersionInfo(){

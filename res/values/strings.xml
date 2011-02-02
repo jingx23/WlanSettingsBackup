@@ -7,4 +7,12 @@
 <string name="infoMessage"></string>
 <string name="btnNameRestore">Restore</string>
 <string name="btnClickHandlerRestore">btnClickHandlerRestore</string>
+<string name="backupSuccessful">Backup successful</string>
+<string name="backupFailed">Backup failed</string>
+<string name="restoreSuccessful">Restore successful</string>
+<string name="restoreFailed">Restore failed</string>
+<string name="backupFileNotFound">Backup file not found:</string>
+<string name="errorNoRoot">No root permission</string>
+<string name="errorNoCatPath">No cat path found</string>
+<string name="errorTitleMsg">Error</string>
 </resources>
