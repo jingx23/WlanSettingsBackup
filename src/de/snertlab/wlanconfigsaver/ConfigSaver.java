@@ -2,6 +2,8 @@ package de.snertlab.wlanconfigsaver;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -25,6 +27,7 @@ public class ConfigSaver extends Activity {
 	public static final String TAG = "wlanSettingsBackup.ActivityConfigSaver";
 	private static final String PACKAGE = "de.snertlab.wlanconfigsaver";
 	
+	private static final SimpleDateFormat SDF_YEAR_MONTH_DAY = new SimpleDateFormat("yyyyMMdd");
 	private static final String WPA_SUPPLICANT_FILENAME = "wpa_supplicant.conf";
 	private static final String WPA_SUPPLICANT_PATH = "/data/misc/wifi/" + WPA_SUPPLICANT_FILENAME;
 	private static final String BACKUP_FILENAME = "wpa_supplicant.conf.bak";
@@ -125,7 +128,11 @@ public class ConfigSaver extends Activity {
     		return;
     	}
     	Common.runAsRoot(catpath + " " + BACKUP_PATH + " > " + WPA_SUPPLICANT_PATH + "\n");
-    	Toast.makeText(this, getString(R.string.restoreSuccessful), Toast.LENGTH_LONG).show(); //TODO: Richtige Prüfung einbauen ob successful oder nicht, z.B. ueber Datum
+    	String msg = getString(R.string.restoreFailed);
+    	if(checkRestoreFileOk(BACKUP_PATH, WPA_SUPPLICANT_PATH)){
+    		msg = getString(R.string.restoreSuccessful);
+    	}
+    	Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     	Log.d(TAG, "btnClickHandlerRestore end");
     }
     
@@ -147,4 +154,20 @@ public class ConfigSaver extends Activity {
     	return versionName;
     }
 
+    private boolean checkRestoreFileOk(String pathBackupFile, String pathRestoredFile){
+    	try{
+	    	int fileSizeBackup  = Common.getFileSize(pathBackupFile);
+	    	int fileSizeRestore = Common.getFileSize(pathRestoredFile);
+	    	Date dateFileRestore= Common.getFileChanged(pathRestoredFile);
+	    	String sDateFileRestore = SDF_YEAR_MONTH_DAY.format(dateFileRestore);
+	    	String sDateCurrent 	= SDF_YEAR_MONTH_DAY.format(new Date());
+	    	if((fileSizeBackup == fileSizeRestore) && sDateFileRestore.equals(sDateCurrent)){
+	    		return true;
+	    	}
+	    	return false;
+    	}catch (Exception e) {
+    		Log.e(TAG, "",e);
+    		return false;
+		}
+    }
 }
