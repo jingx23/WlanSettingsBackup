@@ -132,10 +132,8 @@ public class Common {
     		for (String string : listStrings) {
     			int indexOfChange = string.indexOf(tagChange);
     			if(indexOfChange!=-1){
-    				Log.w(TAG, "BEGIN DATEEEEE: " + indexOfChange);
     				String sDate = string.substring(indexOfChange + tagChange.length());
     				sDate = sDate.trim();
-    				Log.w(TAG, "END DATEEEEE: " + sDate);
     				Date d = SDF_FILE_CHANGE.parse(sDate);
     				return d;
     			}
