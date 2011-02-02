@@ -11,6 +11,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -40,6 +43,30 @@ public class ConfigSaver extends Activity {
         doInit();
         checkAllOk();
     }
+    
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.menu, menu);
+	    return true;
+	}
+
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		 switch (item.getItemId()) {
+		    case R.id.menuQuit:
+		        quit();
+		        return true;
+		    default:
+		        return super.onOptionsItemSelected(item);
+		    }
+	}
+	
+	private void quit(){
+		this.finish();
+		System.exit(0);
+	}
+
     
     private void checkAllOk(){
     	String errMessage = null;

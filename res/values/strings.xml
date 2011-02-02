@@ -15,4 +15,5 @@
 <string name="errorNoRoot">No root permission</string>
 <string name="errorNoCatPath">No cat path found</string>
 <string name="errorTitleMsg">Error</string>
+<string name="menuQuit">Quit</string>
 </resources>
