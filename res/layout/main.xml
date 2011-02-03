@@ -9,7 +9,7 @@
 
 
 <Button android:id="@+id/Button02" android:text="@string/btnNameRestore" android:onClick="@string/btnClickHandlerRestore" android:layout_height="wrap_content" android:layout_width="fill_parent"></Button>
-<CheckBox android:id="@+id/checkBox1" android:text="Backup per Mail senden" android:layout_height="wrap_content" android:layout_width="match_parent"></CheckBox>
+<CheckBox android:id="@+id/checkBox1" android:layout_height="wrap_content" android:layout_width="match_parent" android:text="@string/lblCheckBackupSendMail"></CheckBox>
 <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_gravity="bottom" android:id="@+id/TextViewProgInfo"></TextView>
 
 

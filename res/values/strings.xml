@@ -16,4 +16,5 @@
 <string name="errorNoCatPath">No cat path found</string>
 <string name="errorTitleMsg">Error</string>
 <string name="menuQuit">Quit</string>
+<string name="lblCheckBackupSendMail">Send Backup file with E-Mail</string>
 </resources>
