@@ -5,16 +5,18 @@ The backup file name is "wpa_supplicant.conf.bak" (!!!caution: your WLAN Keys ar
 
 TODO:
 -----
-- GUI improvements
-- Error handling
-- Zip and send backup mail
 - change backup location
 
 Changelog:
 ----------
+- Version 1.1.1
+  - I18N fixed english translation
+- Version 1.1.0
+  - Added send Backup with E-Mail
+  - checking if restore is successful
 - Version 1.0.3 (110116)
   - Added logging
-  - Show info if we have no root or didn«t find cat path
+  - Show info if we have no root or didn´t find cat path
 - Version 1.0.2 (110114)
   - Changed from cp to cat
 - Version 1.0.1 (101023)
