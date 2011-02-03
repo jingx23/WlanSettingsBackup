@@ -39,6 +39,7 @@ public final class R {
         public static final int errorNoRoot=0x7f04000b;
         public static final int errorTitleMsg=0x7f04000d;
         public static final int infoMessage=0x7f040003;
+        public static final int lblCheckBackupSendMail=0x7f04000f;
         public static final int menuQuit=0x7f04000e;
         public static final int restoreFailed=0x7f040009;
         public static final int restoreSuccessful=0x7f040008;
