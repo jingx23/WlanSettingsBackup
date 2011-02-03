@@ -7,4 +7,5 @@ bin/**/*
 bin/
 deploy/
 proguard/
+gen/
 wlanSettingsBackup.keystore
