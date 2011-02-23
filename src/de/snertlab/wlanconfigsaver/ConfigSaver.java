@@ -139,7 +139,7 @@ public class ConfigSaver extends Activity {
     private void sendMailWithBackupFile(File backupFile){
     	String appName = getString(R.string.app_name);
 		Intent emailIntent = Common.createMailIntent(new String[]{""}, appName, "", backupFile);
-		startActivity(Intent.createChooser(emailIntent, appName)); 
+		startActivity(emailIntent); 
     }
     
     private String getVersionInfo(){
