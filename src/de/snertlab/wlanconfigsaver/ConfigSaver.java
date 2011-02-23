@@ -6,7 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -139,7 +141,15 @@ public class ConfigSaver extends Activity {
     private void sendMailWithBackupFile(File backupFile){
     	String appName = getString(R.string.app_name);
 		Intent emailIntent = Common.createMailIntent(new String[]{""}, appName, "", backupFile);
-		startActivity(emailIntent); 
+		try{
+			startActivity(emailIntent);
+		}catch(ActivityNotFoundException e){
+	        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	        builder.setTitle(R.string.app_name);
+	        builder.setMessage(R.string.msg_intent_failed);
+	        builder.setPositiveButton("OK", null);
+	        builder.show();
+		}
     }
     
     private String getVersionInfo(){

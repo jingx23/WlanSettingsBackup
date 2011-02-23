@@ -17,4 +17,5 @@
 <string name="errorTitleMsg">Fehler</string>
 <string name="menuQuit">Beenden</string>
 <string name="lblCheckBackupSendMail">Backup per Mail senden</string>
+<string name="msg_intent_failed">Die gewünschte Applikation kann nicht geöffnet werden.</string>
 </resources>
