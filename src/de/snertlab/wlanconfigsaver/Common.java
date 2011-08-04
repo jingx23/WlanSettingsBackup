@@ -167,7 +167,6 @@ public class Common {
     	builder.setTitle(title);
     	builder.setIcon(0);
     	builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
 			}
